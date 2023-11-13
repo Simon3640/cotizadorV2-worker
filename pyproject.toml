@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "celery-worker-template"
+version = "0.1.0"
+description = ""
+authors = ["Simón <simon.garcial@udea.edu.co>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+celery = "^5.3.5"
+requests = "^2.31.0"
+pydantic = "^2.5.0"
+pydantic-settings = "^2.0.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

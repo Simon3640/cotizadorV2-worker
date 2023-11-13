@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "Python: entry",
+            "type": "python",
+            "request": "launch",
+            "program": "entry.py",
+            "console": "integratedTerminal",
+            "env": {
+                "ENVIRONMENT":"dev",
+                "DEBUGGER":"False",
+                "AMQP_DSN":"amqp://user:bitnami@localhost:5672",
+            }
+        },
+        {
+            "name": "Python: celery worker template",
+            "type": "python",
+            "request": "launch",
+            "module": "celery",
+            "console": "integratedTerminal",
+            "args": [
+                "-A",
+                "app.workers.task",
+                "worker",
+                "--without-gossip",
+                "--without-mingle",
+                "-Q",
+                "worker-template-task-dev",
+                "--loglevel=info",
+                "-c",
+                "1"
+            ],
+            "env": {
+                "ENVIRONMENT":"dev",
+                "DEBUGGER":"False",
+                "AMQP_DSN":"amqp://user:bitnami@localhost:5672",
+            }
+        }
+    ]
+}
