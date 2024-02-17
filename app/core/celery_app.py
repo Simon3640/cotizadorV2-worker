@@ -26,8 +26,8 @@ celery_app = Celery("worker", config_source=celery_config)
 
 
 celery_app.conf.task_routes = {
-    "app.workers.task.celery_task": {
-        "queue": f"worker-template-task{WORKER_ENVIRONMENT}"
+    "app.workers.sale.sale": {
+        "queue": f"cotizadorV2-sale{WORKER_ENVIRONMENT}"
     }
 }
 

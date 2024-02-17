@@ -12,6 +12,7 @@
                 "ENVIRONMENT":"dev",
                 "DEBUGGER":"False",
                 "AMQP_DSN":"amqp://user:bitnami@localhost:5672",
+                "DATABASE_URL": "http://localhost:8002/api/v1"
             }
         },
         {
@@ -22,12 +23,12 @@
             "console": "integratedTerminal",
             "args": [
                 "-A",
-                "app.workers.task",
+                "app.workers.sale",
                 "worker",
                 "--without-gossip",
                 "--without-mingle",
                 "-Q",
-                "worker-template-task-dev",
+                "cotizadorV2-sale-dev",
                 "--loglevel=info",
                 "-c",
                 "1"
@@ -36,6 +37,7 @@
                 "ENVIRONMENT":"dev",
                 "DEBUGGER":"False",
                 "AMQP_DSN":"amqp://user:bitnami@localhost:5672",
+                "DATABASE_URL": "http://localhost:8002/api/v1"
             }
         }
     ]

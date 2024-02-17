@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = Field(...)
     DEBUGGER: bool = Field(..., env="DEBUGGER")
 
+    DATABASE_URL: str
+
     EXCEPTIONS: dict = {
         "es": {
             400: "Solicitud al servidor incorrecta",

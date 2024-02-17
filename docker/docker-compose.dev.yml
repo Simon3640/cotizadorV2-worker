@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  cotizador-worker:
+    build:
+        context: ..
+        dockerfile: docker/Dockerfile.dev
+    command:
+      [
+        "celery",
+        "-A",
+        "app.workers.sale",
+        "worker",
+        "--without-gossip",
+        "--without-mingle",
+        "-Q",
+        "cotizadorV2-sale-dev",
+        "--loglevel=info",
+        "-c",
+        "1"
+      ]
+    volumes:
+        - ../:/usr/src/app/
+    env_file:
+        - ../.env
+    networks:
+        - cotizador
+    restart: on-failure
+
+
+networks:
+    cotizador:
+        external: True

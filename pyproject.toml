@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "celery-worker-template"
+name = "celery-cotizadorV2"
 version = "0.1.0"
 description = ""
 authors = ["Simón <simon.garcial@udea.edu.co>"]
@@ -11,6 +11,8 @@ celery = "^5.3.5"
 requests = "^2.31.0"
 pydantic = "^2.5.0"
 pydantic-settings = "^2.0.3"
+jinja2 = "^3.1.2"
+weasyprint = "^60.1"
 
 
 [build-system]

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Factura</title>
+  <style>
+    body {
+      font-size: 10px;
+    }
+
+    h2 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .header {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2em;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .logo {
+      height: 110px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .totals {
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="logo.jpg" class="logo">
+  </div>
+  <h2> {% if status == 'pagada' %}Factura N° {{consecutive}}{%else%}{{status.title()}}{%endif%}</h2>
+  <p>MONICA ROLDAN ORTEGA</p>
+  <p>NIT: 59.680.231-6</p>
+  <p><strong>Vendedor:</strong> {{ user.email }}</p>
+  <p><strong>Cliente:</strong> {{ buyer.names }} {{ buyer.last_names }}</p>
+  <p><strong>Fecha de creación:</strong> {{ updated_at.split('T')[0] }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>IVA</th>
+        <th>Descuento</th>
+        <th>Total</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for _sale_product in sale_product %}
+      <tr>
+        <td>{{ _sale_product.product.name }}</td>
+        <td>{{ _sale_product.total |round|format}}</td>
+        <td>{{ _sale_product.product.value |round|format }}</td>
+        <td>{{ _sale_product.tax }}%</td>
+        <td>{{ _sale_product.discount }}%</td>
+        <td>{{ (_sale_product.total * _sale_product.product.value * (1+_sale_product.tax/100)) |round|format }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="totals">
+    <p><strong>Total sin IVA:</strong> {{ (total - total_tax ) |round|format }}</p>
+    <p><strong>Total impuestos:</strong> {{ total_tax |round|format }}</p>
+    <p><strong>Total con IVA:</strong> {{ total |round|format }}</p>
+    <p><strong>Total descuento:</strong> {{ total_discount |round|format }}</p>
+  </div>
+</body>
+
+</html>
